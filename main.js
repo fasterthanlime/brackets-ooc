@@ -8,6 +8,8 @@ define(function (require, exports, module) {
     LanguageManager.defineLanguage("ooc", {
         name: "ooc",
         mode: ["clike", "text/x-ooc"],
-        fileExtensions: ["ooc"]
+        fileExtensions: ["ooc"],
+        blockComment: ["/*", "*/"],
+        lineComment: ["//"] 
     });
 });
