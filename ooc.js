@@ -4,7 +4,7 @@
         for (var i = 0; i < words.length; ++i) obj[words[i]] = true;
         return obj;
     }
-    
+
     CodeMirror.defineMIME("text/x-ooc", {
         name: "clike",
         keywords: words(
@@ -14,13 +14,11 @@
             "abstract static final extern const proto unmangled inline " +
             "private protected public internal " +
             "new this as super " +
-            "break return continue " +
+            "break return continue in " +
             "case " +
             "if else match " +
             "while for " +
             "try catch " +
-            "true false " +
-            "_ : = := => <=> " +
 
             /* built-in sdk types */
             "assert print println printf " +
@@ -33,6 +31,12 @@
             "Void Pointer Bool SizeT This Class Object Func "
         ),
         blockKeywords: words("catch class cover else for if match try while func"),
-        atoms: words("true false null")
+        atoms: words("true false null"),
+        hooks: {
+            // highlight operators beginning with :
+            ":": function (stream) {
+                return stream.eatWhile(/[+\-*&%=<>!?|\/]/) ? "operator" : null;
+            }
+        }
     });
-})();
+})(); 
